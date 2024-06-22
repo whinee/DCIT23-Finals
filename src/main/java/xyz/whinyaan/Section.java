@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 // Arriola
 public class Section {
-    public void anotherTransaction()
+    public void anotherTransaction() throws Exception
     {
         int response = JOptionPane.showConfirmDialog(null, "Do you want to make another transaction?", "Select an Option", JOptionPane.YES_NO_OPTION);
         User login = new User();
@@ -17,7 +17,7 @@ public class Section {
             login.login();
         }
     }
-    public void selectSection()
+    public void selectSection() throws Exception
     {
         String[] sections = {"Fruits and Vegetable", "Frozen Meats", "Canned/Jarred Goods", "Dairy and Baking Goods", "Beverage", "Personal Care and Cleaners"};
 

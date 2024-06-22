@@ -30,7 +30,9 @@ public class Item {
                 break;
             case "Canned/Jarred Goods":
                 items.put("555 Tuna", Arrays.asList(25.25, 1, "piece"));
-                items.put("Argentina Corned beef", Arrays.asList(30.75, 1, "piece"));
+                items.put("Argentina Corned beef", Arrays.asList(
+                    30.75, 1, "piece"
+                ));
                 items.put("Maling", Arrays.asList(53, 1, "piece"));
                 items.put("Silver swan", Arrays.asList(15.75, 1, "piece"));
                 items.put("UFC Ketchup", Arrays.asList(11.50, 1, "piece"));
@@ -48,7 +50,9 @@ public class Item {
                 items.put("Zest-o", Arrays.asList(12, 1, "piece"));
                 items.put("Vita milk", Arrays.asList(35, 1, "piece"));
                 items.put("Cobra", Arrays.asList(24.50, 1, "piece"));
-                items.put("Bearbrand Sterilized", Arrays.asList(38.25, 1, "piece"));
+                items.put("Bearbrand Sterilized", Arrays.asList(
+                    38.25, 1, "piece"
+                ));
                 items.put("Red horse", Arrays.asList(110.00, 1, "piece"));
                 break;
             case "Personal Care and Cleaners":
@@ -57,13 +61,14 @@ public class Item {
                 items.put("Safeguard", Arrays.asList(19.75, 1, "piece"));
                 items.put("Mr. clean (bar)", Arrays.asList(27.25, 1, "piece"));
                 items.put("Downy", Arrays.asList(15, 1, "piece"));
-                items.put("Tender care (powder)", Arrays.asList(21, 1, "piece"));
+                items.put("Tender care (powder)", Arrays.asList(
+                    21, 1, "piece"
+                ));
                 items.put("Modess (8 pcs)", Arrays.asList(47.25, 1, "pack"));
                 items.put("Gatsby", Arrays.asList(50.75, 1, "piece"));
                 break;
             default:
                 throw new Exception("Code should not reach here.");
-                break;
         }
 
         ArrayList<String> keysList = new ArrayList<>(items.keySet());
@@ -87,13 +92,20 @@ public class Item {
         int quantity = 0;
 
         while (true) {
-            String input = JOptionPane.showInputDialog(null, "Enter number of " + unitNum + " " + unit + ":" );
+            String input = JOptionPane.showInputDialog(
+                null, "Enter number of " + unitNum + " " + unit + ":",
+            );
             
             try {
                 quantity = Integer.parseInt(input);
                 break;
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Invalid input. Please try again and enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Invalid input. Please try again and enter a valid number.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE,
+                );
             }
         }
 

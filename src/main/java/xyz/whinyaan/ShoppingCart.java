@@ -2,8 +2,12 @@ package xyz.whinyaan;
 
 // Mikyla
 public class ShoppingCart {
-    public void addItemToCart(float price, float unitNum, String unit, int quantity)
-    {
+    public void addItemToCart(
+        float price,
+        float unitNum,
+        String unit,
+        int quantity
+    ) {
         System.out.println( "Added Item" );
     }
 
