@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 // Arriola
 public class Item {
-    public void selectItem(String section)
+    public void selectItem(String section) throws Exception
     {
         System.out.println(section);
         HashMap<String, List<Object>> items = new HashMap<>();
@@ -61,6 +61,9 @@ public class Item {
                 items.put("Modess (8 pcs)", Arrays.asList(47.25, 1, "pack"));
                 items.put("Gatsby", Arrays.asList(50.75, 1, "piece"));
                 break;
+            default:
+                throw new Exception("Code should not reach here.");
+                break;
         }
 
         ArrayList<String> keysList = new ArrayList<>(items.keySet());
@@ -96,7 +99,5 @@ public class Item {
 
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.addItemToCart(price, unitNum, unit, quantity);
-
-        return;
     }
 }

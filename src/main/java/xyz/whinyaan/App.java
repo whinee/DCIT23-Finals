@@ -22,7 +22,5 @@ public class App
 
         User login = new User();
         login.login();
-        
-        return;
     }
 }

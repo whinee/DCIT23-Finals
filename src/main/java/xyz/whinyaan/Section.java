@@ -38,7 +38,5 @@ public class Section {
 
         Item item = new Item();
         item.selectItem(section);
-        
-        return;
     }
 }
