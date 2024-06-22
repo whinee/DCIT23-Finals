@@ -7,7 +7,7 @@ import java.awt.Color;
 
 // Arriola
 public class App {
-    public void anotherTransaction() throws Exception
+    public void anotherTransaction() throws IllegalStateException
     {
         int response = JOptionPane.showConfirmDialog(
             null,
@@ -27,7 +27,7 @@ public class App {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IllegalStateException {
         UIManager.put("OptionPane.messageFont", new Font(
             "Arial", Font.BOLD, 14
         ));

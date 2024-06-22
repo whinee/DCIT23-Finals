@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JOptionPane;
 
 // Arriola
 public class Item {
-    public void selectItem(String section) throws Exception
+    public void selectItem(String section) throws IllegalStateException
     {
         System.out.println(section);
         HashMap<String, List<Object>> items = new HashMap<>();
@@ -68,7 +67,7 @@ public class Item {
                 items.put("Gatsby", Arrays.asList(50.75, 1, "piece"));
                 break;
             default:
-                throw new Exception("Code should not reach here.");
+                throw new IllegalStateException("Code should not reach here.");
         }
 
         ArrayList<String> keysList = new ArrayList<>(items.keySet());

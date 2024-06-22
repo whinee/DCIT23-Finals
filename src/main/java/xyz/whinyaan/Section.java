@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 // Arriola
 public class Section {
-    public void selectSection() throws Exception
+    public void selectSection() throws IllegalStateException
     {
         String[] sections = {
             "Fruits and Vegetable",

@@ -4,7 +4,7 @@ import xyz.whinyaan.Section;
 
 // Crisostomo
 public class User {
-    public void login() throws Exception
+    public void login() throws IllegalStateException
     {
         System.out.println( "Login" );
 
