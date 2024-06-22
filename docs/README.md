@@ -1,4 +1,7 @@
-# DCIT23 Finals Group Work
+<h1 align="center" style="font-weight: bold">
+    # DCIT23 Finals Group Work
+
+</h1>
 
 <p align="center">
     <a href="https://github.com/whinee/DCIT23-Finals/issues">
