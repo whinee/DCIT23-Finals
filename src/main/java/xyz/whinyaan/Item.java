@@ -84,6 +84,12 @@ public class Item {
                 keys[0]
         );
 
+        if (item == null) {
+            App app = new App();
+            app.anotherTransaction();
+            return;
+        }
+
         List<Object> value = items.get(item);
 
         float price = ((Number) value.get(0)).floatValue();
@@ -93,8 +99,14 @@ public class Item {
 
         while (true) {
             String input = JOptionPane.showInputDialog(
-                null, "Enter number of " + unitNum + " " + unit + ":",
+                null, "Enter number of " + unitNum + " " + unit + ":"
             );
+
+            if (input == null) {
+                App app = new App();
+                app.anotherTransaction();
+                return;
+            }
             
             try {
                 quantity = Integer.parseInt(input);
@@ -104,7 +116,7 @@ public class Item {
                     null,
                     "Invalid input. Please try again and enter a valid number.",
                     "Error",
-                    JOptionPane.ERROR_MESSAGE,
+                    JOptionPane.ERROR_MESSAGE
                 );
             }
         }
