@@ -1,4 +1,4 @@
-# DCIT23 Finals Group Work by Group 1
+# DCIT23 Finals Group Work
 
 <p align="center">
     <a href="https://github.com/whinee/DCIT23-Finals/issues">
@@ -24,7 +24,7 @@
     </a>
 </p>
 
-This group consists of Trisha Carias, Neil Crisostomo, and Mikyla Reign, led by Jeremy Vien Arriola.
+Hello! We are Group 1 from BSCS 1-3 in Cavite State University Main Campus. This group consists of Trisha Carias, Neil Crisostomo, and Mikyla Reign, led by Jeremy Vien Arriola.
 
 The group work is about simulating a grocery shop using JOptionPane.
 
