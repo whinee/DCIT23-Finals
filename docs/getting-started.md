@@ -60,9 +60,18 @@
     choco install -y git
     ```
 
-    Then, repeat step 2-7.
+    Then, repeat step 2-8.
 
 10. Download an OpenJDK build from [adoptium.net](https://adoptium.net/) and install it.
+
+11. Replace the "username" and "email" in the following text with your respective username and email you used for registration in Github:
+
+    ```ps1
+    git config --global user.name "username"
+    git config --global user.email "email"
+    ```
+
+    Then, repeat step 2-8.
 
 <h2 id="installing-prerequisites-linux"><b><i><a href="#installing-prerequisites-linux">Linux</a></i></b></h2>
 
