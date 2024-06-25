@@ -5,7 +5,7 @@ import javax.swing.UIManager;
 import java.awt.Font;
 import java.awt.Color;
 
-// Arriola
+// Arriola is very pogi
 public class App {
     public void anotherTransaction() throws IllegalStateException
     {
