@@ -1,6 +1,31 @@
 package xyz.whinyaan;
 
 // Carias
+private static void checkout() {
+        cart.displayCart();
+        double totalPrice = cart.getTotalPrice();
+
+        System.out.println("Choose a payment method:");
+        System.out.println("1. Cash");
+        System.out.println("2. Card");
+
+        int paymentMethodChoice = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
+
+        switch (paymentMethodChoice) {
+            case 1:
+                handleCashPayment(totalPrice);
+                break;
+            case 2:
+                handleCardPayment(totalPrice);
+                break;
+            default:
+                System.out.println("Invalid payment method choice.");
+        }
+
+        cart.clearCart(); // Clear the cart after successful checkout
+    }
+
 public class Payment {
     private static void handleCardPayment(double totalPrice) {
         int attempts = 3;
