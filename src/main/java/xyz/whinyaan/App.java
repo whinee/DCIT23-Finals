@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 
 // Arriola
@@ -115,18 +116,18 @@ public class App {
             return;
         }
 
-        String password = JOptionPane.showInputDialog("Enter Password:");
-        if (password == null || password.isEmpty()) {
-            return;
-        }
-
-        String confirmPassword = JOptionPane.showInputDialog("Confirm Password:");
-        if (confirmPassword == null || !password.equals(confirmPassword)) {
-            JOptionPane.showMessageDialog(
-                null,
-                "Passwords do not match!",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+        JPasswordField passwordField = new JPasswordField();
+        int passwordOption = JOptionPane.showConfirmDialog(null, passwordField, "Enter Password:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (passwordOption != JOptionPane.OK_OPTION) return;
+        String password = new String(passwordField.getPassword());
+        if (password.isEmpty()) return;
+        
+        JPasswordField confirmPasswordField = new JPasswordField();
+        int confirmPasswordOption = JOptionPane.showConfirmDialog(null, confirmPasswordField, "Confirm Password:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (confirmPasswordOption != JOptionPane.OK_OPTION) return;
+        String confirmPassword = new String(confirmPasswordField.getPassword());
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -152,10 +153,11 @@ public class App {
             return;
         }
 
-        String password = JOptionPane.showInputDialog("Enter Password:");
-        if (password == null || password.isEmpty()) {
-            return;
-        }
+        JPasswordField passwordField = new JPasswordField();
+        int passwordOption = JOptionPane.showConfirmDialog(null, passwordField, "Enter Password:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (passwordOption != JOptionPane.OK_OPTION) return;
+        String password = new String(passwordField.getPassword());
+        if (password.isEmpty()) return;
 
         User user = getUserByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
