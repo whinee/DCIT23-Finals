@@ -31,7 +31,7 @@ public class Section {
             return;
         }
 
-        Item item = new Item();
-        item.selectItem(section);
+        SelectItem selectItem = new SelectItem();
+        selectItem.selectItem(section);
     }
 }

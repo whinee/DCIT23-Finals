@@ -5,9 +5,6 @@ import javax.swing.JOptionPane;
 //Carias
 public class Payment {
     public static void payment(double totalPrice) {
-        ShoppingCart cart = new ShoppingCart();
-        cart.displayCart();
-
         String[] options = {"Cash", "Card"};
         int paymentMethodChoice = JOptionPane.showOptionDialog(null,
                 "Choose a payment method:",
