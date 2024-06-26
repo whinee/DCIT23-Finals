@@ -134,14 +134,18 @@ public class App {
         if (confirmPasswordOption != JOptionPane.OK_OPTION) return;
         String confirmPassword = new String(confirmPasswordField.getPassword());
         if (!password.equals(confirmPassword)) {
-            JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                null,
+                "Passwords do not match!",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (isUsernameTaken(username)) {
             JOptionPane.showMessageDialog(
                 null,
-                "Username alread throws IllegalStateExceptiony exists!",
+                "Username already exists!",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
             return;
@@ -151,7 +155,8 @@ public class App {
         JOptionPane.showMessageDialog(
                 null,
                 "Registration successful!",
-                "Success", JOptionPane.INFORMATION_MESSAGE);
+                "Success",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void showLoginPanel() {
