@@ -3,6 +3,7 @@ package xyz.whinyaan;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -15,11 +16,10 @@ public class SectionSelector extends JDialog {
     private String selectedSection;
     private static boolean cartDisplayed = false;
 
-    public SectionSelector(JDialog parent, String[] sections) {
+    public SectionSelector(JFrame parent, String[] sections) {
         super(parent, "Sections", true);
         
         comboBox = new JComboBox<>(sections);
-        
 
         JPanel panel = new JPanel();
         panel.add(new JLabel("Select a section:"));
@@ -29,6 +29,7 @@ public class SectionSelector extends JDialog {
         panel.add(cartButton);
 
         okButton.addActionListener(e -> {
+            parent.dispose();
             dispose();
             selectedSection = (String) comboBox.getSelectedItem();
         });
@@ -36,13 +37,19 @@ public class SectionSelector extends JDialog {
         cancelButton.addActionListener(e -> dispose());
 
         cartButton.addActionListener(e -> {
+            parent.dispose();
             dispose();
             cartDisplayed = true;
             ShoppingCart.showCart();
         });
 
+        
         getContentPane().add(panel);
         pack();
+
+        setLocationRelativeTo(parent);
+
+        // parent.dispose();
     }
 
     public String showDialog() {
@@ -60,20 +67,18 @@ public class SectionSelector extends JDialog {
             "Personal Care and Cleaners",
         };
 
-        JDialog dialog = new JDialog();
-        dialog.setModal(true);
+        JFrame dialog = new JFrame();
+        dialog.setVisible(true);
 
         SectionSelector sectionSelector = new SectionSelector(dialog, sections);
         String selectedSection = sectionSelector.showDialog();
-
 
         if (cartDisplayed) {
             dialog.dispose();
             cartDisplayed = false;
         } else if (selectedSection == null) {
             dialog.dispose();
-            App app = new App();
-            app.anotherTransaction();
+            App.anotherTransaction();
         } else {
             dialog.dispose();
             SelectItem selectItem = new SelectItem();

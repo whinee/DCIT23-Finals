@@ -13,7 +13,7 @@ public class App {
     public static User[] userDatabase = new User[100];
     public static int userCount = 0;
 
-    public static void start() throws IllegalStateException {
+    public static void start() {
         String[] options = {"Register", "Login", "Exit"};
 
         int choice = JOptionPane.showOptionDialog(
@@ -36,11 +36,12 @@ public class App {
             case 2:
                 System.exit(0);
             default:
+                start();
                 break;
             }
     }
 
-    public void anotherTransaction() throws IllegalStateException {
+    public static void anotherTransaction() {
         int response = JOptionPane.showConfirmDialog(
                 null,
                 "Do you want to make another transaction?",
@@ -60,7 +61,7 @@ public class App {
         }
     }
 
-    public static void main(String[] args) throws IllegalStateException {
+    public static void main(String[] args) {
         UIManager.put("OptionPane.messageFont", new Font(
                 "Arial", Font.BOLD, 14));
         UIManager.put("OptionPane.buttonFont", new Font(
@@ -95,12 +96,12 @@ public class App {
     public static void showRegisterPanel() {
         String username = JOptionPane.showInputDialog("Enter Username:");
         if (username == null || username.isEmpty()) {
-            return;
+            anotherTransaction();
         }
 
         String fullName = JOptionPane.showInputDialog("Enter Full Name:");
         if (fullName == null || fullName.isEmpty()) {
-            return;
+            anotherTransaction();
         }
 
         String contactNo = JOptionPane.showInputDialog("Enter Contact No.:");
@@ -110,7 +111,7 @@ public class App {
                 "Contact number must contain only digits!",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
-            return;
+            anotherTransaction();
         }
 
         JPasswordField passwordField = new JPasswordField();
@@ -120,9 +121,14 @@ public class App {
             "Enter Password:",
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.PLAIN_MESSAGE);
-        if (passwordOption != JOptionPane.OK_OPTION) return;
+        if (passwordOption != JOptionPane.OK_OPTION) {
+            anotherTransaction();
+        };
         String password = new String(passwordField.getPassword());
-        if (password.isEmpty()) return;
+    
+        if (password.isEmpty()) {
+            anotherTransaction();
+        };
         
         JPasswordField confirmPasswordField = new JPasswordField();
         int confirmPasswordOption = JOptionPane.showConfirmDialog(
@@ -131,7 +137,9 @@ public class App {
             "Confirm Password:",
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.PLAIN_MESSAGE);
-        if (confirmPasswordOption != JOptionPane.OK_OPTION) return;
+        if (confirmPasswordOption != JOptionPane.OK_OPTION) {
+            anotherTransaction();
+        }
         String confirmPassword = new String(confirmPasswordField.getPassword());
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(
@@ -139,7 +147,7 @@ public class App {
                 "Passwords do not match!",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
-            return;
+            anotherTransaction();
         }
 
         if (isUsernameTaken(username)) {
@@ -148,7 +156,7 @@ public class App {
                 "Username already exists!",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
-            return;
+            anotherTransaction();
         }
 
         userDatabase[userCount++] = new User(username, fullName, contactNo, password);
@@ -162,7 +170,7 @@ public class App {
     public static void showLoginPanel() {
         String username = JOptionPane.showInputDialog("Enter Username:");
         if (username == null || username.isEmpty()) {
-            return;
+            anotherTransaction();
         }
 
         JPasswordField passwordField = new JPasswordField();
@@ -172,9 +180,13 @@ public class App {
             "Enter Password:",
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.PLAIN_MESSAGE);
-        if (passwordOption != JOptionPane.OK_OPTION) return;
+        if (passwordOption != JOptionPane.OK_OPTION) {
+            anotherTransaction();
+        }
         String password = new String(passwordField.getPassword());
-        if (password.isEmpty()) return;
+        if (password.isEmpty()) {
+            anotherTransaction();
+        }
 
         User user = getUserByUsername(username);
         if (user == null || !user.getPassword().equals(password)) {
