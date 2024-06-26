@@ -1,91 +1,78 @@
 package xyz.whinyaan;
 
-import java.util.Optional;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
-// Carias
-// implement in javax.swing.JOptionPane instead of java.util.Scanner
-// make sure other modules can call ur modules
-// dont change the names of other modules/functions
+//Carias
 public class Payment {
     public static void payment(double totalPrice) {
-        Scanner scanner = new Scanner(System.in);
         ShoppingCart cart = new ShoppingCart();
         cart.displayCart();
 
-        System.out.println("Choose a payment method:");
-        System.out.println("1. Cash");
-        System.out.println("2. Card");
-
-        int paymentMethodChoice = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        String[] options = {"Cash", "Card"};
+        int paymentMethodChoice = JOptionPane.showOptionDialog(null,
+                "Choose a payment method:",
+                "Payment Method",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[0]);
 
         switch (paymentMethodChoice) {
-            case 1:
+            case 0:
                 handleCashPayment(totalPrice);
                 break;
-            case 2:
+            case 1:
                 handleCardPayment(totalPrice);
                 break;
             default:
-                System.out.println("Invalid payment method choice.");
+                JOptionPane.showMessageDialog(null, "Invalid payment method choice.");
         }
-
-        scanner.close();
     }
 
-    // reimplement
-    // pass items in cart to printReceipt as argument instead of grabbing it using cart.items
-    public static void printReceipt(double totalPrice, Optional<Double> change) {
-        // ShoppingCart cart = new ShoppingCart();
-        // System.out.println("\n---- Receipt ----");
-        // for (Item item : cart.items) {
-        //     System.out.printf("%s: %d %s @ %.2f each\n", item.name, item.quantity, item.unit, item.price);
-        // }
-        // System.out.printf("Total Price: %.2f\n", totalPrice);
-        // change.ifPresent(c -> System.out.printf("Change: %.2f\n", c));
-        // System.out.println("-----------------");
+    private static void handleCashPayment(double totalPrice) {
+        String amountStr = JOptionPane.showInputDialog(null, "Enter the amount paid:");
+        double amountPaid = Double.parseDouble(amountStr);
+        if (amountPaid >= totalPrice) {
+            double change = amountPaid - totalPrice;
+            JOptionPane.showMessageDialog(null, "Payment successful. Change: " + change);
+        } else {
+            JOptionPane.showMessageDialog(null, "Insufficient amount. Payment failed.");
+        }
     }
 
-    // implement this
-    public static void handleCashPayment(double totalPrice) {
+    private static void handleCardPayment(double totalPrice) {
+        String cardNumber = JOptionPane.showInputDialog(null, "Enter card number:");
+        String cardHolder = JOptionPane.showInputDialog(null, "Enter card holder name:");
+        String expiryDate = JOptionPane.showInputDialog(null, "Enter card expiry date (MM/YY):");
+        String cvv = JOptionPane.showInputDialog(null, "Enter card CVV:");
+
+        if (isValidCardNumber(cardNumber)) {
+            JOptionPane.showMessageDialog(null, "Card payment successful.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid card number. Payment failed.");
+        }
     }
 
-    public static void handleCardPayment(double totalPrice) {
-        // remove number of attempts. let the user recurse/repeat as much as they want
-        int attempts = 3;
-
-        Scanner scanner = new Scanner(System.in);
-        ShoppingCart cart = new ShoppingCart();
-        cart.clearCart(); // Clear the cart after successful checkout
-
-        while (attempts > 0) {
-            System.out.print("Enter card verification value (CVV): ");
-            String cvvStr = scanner.nextLine();
-            try {
-                int cvv = Integer.parseInt(Optional.ofNullable(cvvStr).orElse("0"));
-                if (validateCVV(cvv)) {
-                    printReceipt(totalPrice, Optional.empty());
-                    return;
-                } else {
-                    attempts--;
-                    System.out.println("Invalid CVV. Please try again. Attempts remaining: " + attempts);
+    private static boolean isValidCardNumber(String cardNumber) {
+        int sum = 0;
+        boolean alternate = false;
+        for (int i = cardNumber.length() - 1; i >= 0; i--) {
+            int n = Integer.parseInt(cardNumber.substring(i, i + 1));
+            if (alternate) {
+                n *= 2;
+                if (n > 9) {
+                    n = (n % 10) + 1;
                 }
-            } catch (NumberFormatException e) {
-                attempts--;
-                System.out.println("In>valid CVV. Please enter a valid number. Attempts remaining: " + attempts);
             }
+            sum += n;
+            alternate = !alternate;
         }
-        System.out.println("Transaction failed. Maximum attempts reached.");
-
-        scanner.close();
+        return (sum % 10 == 0);
     }
 
-    // CVV cant be validated. remove this function
-    // instead, validate credit/debit card number using Luhn's algorithm
-    // https://www.dcode.fr/luhn-algorithm
-    public static boolean validateCVV(int cvv) {
-        // CVV validation
-        return cvv == 123; // Assume 123 is the correct CVV (idk tayo ba magset?)
+    public static void main(String[] args) {
+        // Example usage
+        payment(100.0);
     }
 }
