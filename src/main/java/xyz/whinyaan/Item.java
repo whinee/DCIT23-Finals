@@ -109,7 +109,15 @@ public class Item {
             
             try {
                 quantity = Integer.parseInt(input);
-                break;
+                if (quantity > 0) {
+                    break;
+                }
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Invalid input. Please try again and enter a non-negative number.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+                );
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(
                     null,
