@@ -16,30 +16,28 @@ public class App {
     public static void start() throws IllegalStateException {
         String[] options = {"Register", "Login", "Exit"};
 
-        while (true) {
-            int choice = JOptionPane.showOptionDialog(
-                null,
-                "Select an option",
-                "Welcome to the shop!",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                options,
-                options[0]);
+        int choice = JOptionPane.showOptionDialog(
+            null,
+            "Select an option",
+            "Welcome to the shop!",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            options,
+            options[0]);
 
-            switch (choice) {
-                case 0:
-                    showRegisterPanel();
-                    break;
-                case 1:
-                    showLoginPanel();
-                    break;
-                case 2:
-                    System.exit(0);
-                default:
-                    break;
+        switch (choice) {
+            case 0:
+                showRegisterPanel();
+                break;
+            case 1:
+                showLoginPanel();
+                break;
+            case 2:
+                System.exit(0);
+            default:
+                break;
             }
-        }
     }
 
     public void anotherTransaction() throws IllegalStateException {
@@ -51,8 +49,7 @@ public class App {
 
         switch (response) {
             case JOptionPane.YES_OPTION:
-                Section section = new Section();
-                section.selectSection();
+                SectionSelector.main();
                 break;
             case JOptionPane.NO_OPTION:
                 start();
@@ -144,7 +141,7 @@ public class App {
         if (isUsernameTaken(username)) {
             JOptionPane.showMessageDialog(
                 null,
-                "Username already exists!",
+                "Username alread throws IllegalStateExceptiony exists!",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
             return;
@@ -175,20 +172,19 @@ public class App {
         if (password.isEmpty()) return;
 
         User user = getUserByUsername(username);
-        if (user != null && user.getPassword().equals(password)) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Login successful! Welcome " + user.getFullName(),
-                    "Success",
-                    JOptionPane.INFORMATION_MESSAGE);
-            Section section = new Section();
-            section.selectSection();
-        } else {
+        if (user == null || !user.getPassword().equals(password)) {
             JOptionPane.showMessageDialog(
                     null,
                     "Invalid username or password!",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Login successful! Welcome " + user.getFullName(),
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+            SectionSelector.main();
         }
     }
 
