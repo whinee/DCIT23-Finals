@@ -133,7 +133,5 @@ public class SelectItem {
 
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.addItem(itemName, item, quantity);
-
-        SectionSelector.main();
     }
 }

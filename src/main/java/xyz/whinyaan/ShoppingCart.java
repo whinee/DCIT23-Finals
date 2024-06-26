@@ -23,17 +23,19 @@ public class ShoppingCart {
                 item,
                 quantity,
                 total));
+
+        SectionSelector.main();
     }
 
     public void removeItem(String itemName) {
         ShoppingCart.cartItems.remove(itemName);
     }
 
-    public void updateItemQuantity(String itemName, Item item, int quantity) {
-        if (quantity > 0) {
-            addItem(itemName, item, quantity);
-        }
-    }
+    // public void updateItemQuantity(String itemName, Item item, int quantity) {
+    //     if (quantity > 0) {
+    //         addItem(itemName, item, quantity);
+    //     }
+    // }
 
     public static double calculateTotal() {
         double total = 0.0;

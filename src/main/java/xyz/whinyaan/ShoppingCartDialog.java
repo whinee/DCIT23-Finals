@@ -1,6 +1,8 @@
 package xyz.whinyaan;
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,7 +20,14 @@ public class ShoppingCartDialog extends JDialog {
         setSize(600, 400);
         setLayout(new BorderLayout());
 
-        String[] columnNames = {"Item", "Unit Price", "Quantity", "Total"};
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                SectionSelector.main();
+            }
+        });
+
+        String[] columnNames = {"Item", "Unit Price", "Unit", "Quantity", "Total"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         JTable table = new JTable(model);
 
@@ -50,7 +59,7 @@ public class ShoppingCartDialog extends JDialog {
 
         backButton.addActionListener(e -> {
             dispose();
-            SectionSelector.main();
+            // SectionSelector.main();
         });
 
         buttonPanel.add(checkoutButton);
@@ -60,10 +69,8 @@ public class ShoppingCartDialog extends JDialog {
         pack();
         setLocationRelativeTo(parent);
         setVisible(true);
-
     }
 
-    public static String main() {
-        return "shit";
+    public static void main() {
     }
 }

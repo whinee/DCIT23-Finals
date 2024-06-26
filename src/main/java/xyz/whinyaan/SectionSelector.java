@@ -8,19 +8,18 @@ import javax.swing.JPanel;
 
 public class SectionSelector extends JDialog {
     private JComboBox<String> comboBox;
-    private JButton okButton;
-    private JButton cancelButton;
-    private JButton cartButton;
+    private final JButton okButton = new JButton("OK");
+    private final JButton cancelButton = new JButton("Cancel");
+    private final JButton cartButton = new JButton("View Cart");
 
     private String selectedSection;
+    private static boolean cartDisplayed = false;
 
     public SectionSelector(JDialog parent, String[] sections) {
         super(parent, "Sections", true);
         
         comboBox = new JComboBox<>(sections);
-        okButton = new JButton("OK");
-        cancelButton = new JButton("Cancel");
-        cartButton = new JButton("View Cart");
+        
 
         JPanel panel = new JPanel();
         panel.add(new JLabel("Select a section:"));
@@ -38,6 +37,7 @@ public class SectionSelector extends JDialog {
 
         cartButton.addActionListener(e -> {
             dispose();
+            cartDisplayed = true;
             ShoppingCart.showCart();
         });
 
@@ -66,15 +66,19 @@ public class SectionSelector extends JDialog {
         SectionSelector sectionSelector = new SectionSelector(dialog, sections);
         String selectedSection = sectionSelector.showDialog();
 
-        if (selectedSection == null) {
+
+        if (cartDisplayed) {
+            dialog.dispose();
+            cartDisplayed = false;
+        } else if (selectedSection == null) {
+            dialog.dispose();
             App app = new App();
-            // app.anotherTransaction();
-            return;
+            app.anotherTransaction();
         } else {
+            dialog.dispose();
             SelectItem selectItem = new SelectItem();
             selectItem.selectItem(selectedSection);
         }
 
-        dialog.dispose();
     }
 }
