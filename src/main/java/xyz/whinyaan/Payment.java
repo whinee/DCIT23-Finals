@@ -30,6 +30,8 @@ public class Payment {
             default:
                 System.out.println("Invalid payment method choice.");
         }
+
+        scanner.close();
     }
 
     // reimplement
@@ -71,10 +73,12 @@ public class Payment {
                 }
             } catch (NumberFormatException e) {
                 attempts--;
-                System.out.println("Invalid CVV. Please enter a valid number. Attempts remaining: " + attempts);
+                System.out.println("In>valid CVV. Please enter a valid number. Attempts remaining: " + attempts);
             }
         }
         System.out.println("Transaction failed. Maximum attempts reached.");
+
+        scanner.close();
     }
 
     // CVV cant be validated. remove this function

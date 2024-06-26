@@ -71,7 +71,7 @@ public class Item {
         }
 
         ArrayList<String> keysList = new ArrayList<>(items.keySet());
-        String[] keys = keysList.toArray(new String[keysList.size()]);
+        String[] keys = keysList.toArray(String[]::new);
 
         String item = (String) JOptionPane.showInputDialog(
                 null,

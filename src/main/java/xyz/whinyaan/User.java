@@ -1,10 +1,10 @@
 package xyz.whinyaan;
 
-class User {
-    private String username;
-    private String fullName;
-    private String contactNo;
-    private String password;
+public class User {
+    public String username;
+    public String fullName;
+    public String contactNo;
+    public String password;
 
     public User(String username, String fullName, String contactNo, String password) {
         this.username = username;
