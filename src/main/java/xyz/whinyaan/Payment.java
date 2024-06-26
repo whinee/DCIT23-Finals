@@ -35,7 +35,9 @@ public class Payment {
         double amountPaid = Double.parseDouble(amountStr);
         if (amountPaid >= totalPrice) {
             double change = amountPaid - totalPrice;
-            JOptionPane.showMessageDialog(null, "Payment successful. Change: " + change);
+            JOptionPane.showMessageDialog(
+                null,
+                "Payment successful. Change: " + change);
         } else {
             JOptionPane.showMessageDialog(null, "Insufficient amount. Payment failed.");
         }
@@ -43,9 +45,15 @@ public class Payment {
 
     private static void handleCardPayment(double totalPrice) {
         String cardNumber = JOptionPane.showInputDialog(null, "Enter card number:");
-        String cardHolder = JOptionPane.showInputDialog(null, "Enter card holder name:");
-        String expiryDate = JOptionPane.showInputDialog(null, "Enter card expiry date (MM/YY):");
-        String cvv = JOptionPane.showInputDialog(null, "Enter card CVV:");
+        String cardHolder = JOptionPane.showInputDialog(
+            null,
+            "Enter card holder name:");
+        String expiryDate = JOptionPane.showInputDialog(
+            null,
+            "Enter card expiry date (MM/YY):");
+        String cvv = JOptionPane.showInputDialog(
+            null,
+            "Enter card CVV:");
 
         if (isValidCardNumber(cardNumber)) {
             JOptionPane.showMessageDialog(null, "Card payment successful.");

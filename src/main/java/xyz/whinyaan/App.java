@@ -117,13 +117,23 @@ public class App {
         }
 
         JPasswordField passwordField = new JPasswordField();
-        int passwordOption = JOptionPane.showConfirmDialog(null, passwordField, "Enter Password:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        int passwordOption = JOptionPane.showConfirmDialog(
+            null,
+            passwordField,
+            "Enter Password:",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE);
         if (passwordOption != JOptionPane.OK_OPTION) return;
         String password = new String(passwordField.getPassword());
         if (password.isEmpty()) return;
         
         JPasswordField confirmPasswordField = new JPasswordField();
-        int confirmPasswordOption = JOptionPane.showConfirmDialog(null, confirmPasswordField, "Confirm Password:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        int confirmPasswordOption = JOptionPane.showConfirmDialog(
+            null,
+            confirmPasswordField,
+            "Confirm Password:",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE);
         if (confirmPasswordOption != JOptionPane.OK_OPTION) return;
         String confirmPassword = new String(confirmPasswordField.getPassword());
         if (!password.equals(confirmPassword)) {
@@ -154,7 +164,12 @@ public class App {
         }
 
         JPasswordField passwordField = new JPasswordField();
-        int passwordOption = JOptionPane.showConfirmDialog(null, passwordField, "Enter Password:", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        int passwordOption = JOptionPane.showConfirmDialog(
+            null,
+            passwordField,
+            "Enter Password:",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE);
         if (passwordOption != JOptionPane.OK_OPTION) return;
         String password = new String(passwordField.getPassword());
         if (password.isEmpty()) return;
