@@ -143,11 +143,11 @@ public class App {
 
         // initialize dummy account for testing
         // remove in deployment
-        // userDatabase[userCount++] = new User(
-        // "test",
-        // "testing account",
-        // "09123456789",
-        // "test");
+        userDatabase[userCount++] = new User(
+        "test",
+        "testing account",
+        "09123456789",
+        "test");
 
         start();
     }
@@ -171,11 +171,19 @@ public class App {
         if (fullName == null || fullName.isEmpty()) {
             start();
         }
+        if (!fullName.matches("^[a-zA-Z ]+$")) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Full name must only contain letters from the English alphabet.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            start();
+        } 
 
         String contactNo = JOptionPane.showInputDialog("Enter Contact No.:");
         if (contactNo == null || contactNo.isEmpty()) {
             start();
-        } else if (!contactNo.matches("\\d+")) {
+        } else if (!contactNo.matches("^\\d+$")) {
             JOptionPane.showMessageDialog(
                     null,
                     "Contact number must contain only digits.",
@@ -201,13 +209,12 @@ public class App {
         if (passwordOption != JOptionPane.OK_OPTION) {
             start();
         }
-        ;
+
         String password = new String(passwordField.getPassword());
 
         if (password.isEmpty()) {
             start();
         }
-        ;
 
         JPasswordField confirmPasswordField = new JPasswordField();
         int confirmPasswordOption = JOptionPane.showConfirmDialog(
@@ -236,6 +243,7 @@ public class App {
                 "Registration successful!",
                 "Success",
                 JOptionPane.INFORMATION_MESSAGE);
+        start();
     }
 
     public static void showLoginPanel() {

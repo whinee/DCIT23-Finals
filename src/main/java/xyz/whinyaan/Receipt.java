@@ -14,10 +14,12 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
-public class ShoppingCartDialog extends JDialog {
-    public ShoppingCartDialog(JDialog parent,
+public class Receipt extends JDialog {
+    public Receipt(
+            JDialog parent,
+            double givenCash,
             HashMap<String, List<Object>> cartItems) {
-        super(parent, "Shopping Cart", true);
+        super(parent, "Receipt", true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setSize(600, 400);
         setLayout(new BorderLayout());
@@ -45,6 +47,7 @@ public class ShoppingCartDialog extends JDialog {
         table.getTableHeader().setForeground(foregroundColor);
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
 
+        int totalQuantity = 0;
         double grandTotal = 0;
 
         for (HashMap.Entry<String, List<Object>> entry : cartItems.entrySet()) {
@@ -58,11 +61,20 @@ public class ShoppingCartDialog extends JDialog {
                     item.getUnitNum() + " " + item.getUnit(),
                     quantity,
                     total });
+            totalQuantity += quantity;
             grandTotal += total;
         }
 
         model.addRow(new Object[] {"", "", "", "", ""});
+        model.addRow(new Object[] {"Total Quantity", "", "", totalQuantity, ""});
         model.addRow(new Object[] {"Grand Total", "", "", "", grandTotal});
+
+        if (givenCash == 0) {
+            model.addRow(new Object[] {"Paid with Card", "", "", "", ""});
+        } else {
+            model.addRow(new Object[] {"Given Cash", givenCash, "", "", ""});
+            model.addRow(new Object[] {"Change", givenCash - grandTotal, "", "", ""});
+        }
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBackground(backgroundColor);
@@ -73,21 +85,14 @@ public class ShoppingCartDialog extends JDialog {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(UIManager.getColor("Panel.background"));
 
-        JButton checkoutButton = new JButton("Checkout");
-        JButton backButton = new JButton("Back");
+        JButton okButton = new JButton("OK");
 
-        checkoutButton.addActionListener(e -> {
+        okButton.addActionListener(e -> {
             dispose();
-            Payment.payment(ShoppingCart.calculateTotal(), cartItems);
+            App.anotherTransaction();
         });
 
-        backButton.addActionListener(e -> {
-            dispose();
-            SectionSelector.main();
-        });
-
-        buttonPanel.add(checkoutButton);
-        buttonPanel.add(backButton);
+        buttonPanel.add(okButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
         pack();

@@ -69,7 +69,7 @@ public class SelectItem {
 
     }
 
-    public void selectItem(String section) {
+    public static void selectItem(String section) {
 
         HashMap<String, Item> items = sectionsItems.get(section);
 
@@ -86,8 +86,7 @@ public class SelectItem {
                 keys[0]);
 
         if (itemName == null) {
-            App app = new App();
-            app.anotherTransaction();
+            App.anotherTransaction();
             return;
         }
 
@@ -102,8 +101,7 @@ public class SelectItem {
                     null, "Enter number of " + unitNum + " " + unit + ":");
 
             if (input == null) {
-                App app = new App();
-                app.anotherTransaction();
+                App.anotherTransaction();
                 return;
             }
 
@@ -127,6 +125,6 @@ public class SelectItem {
         }
 
         ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.addItem(itemName, item, quantity);
+        shoppingCart.addItem(section, itemName, item, quantity);
     }
 }

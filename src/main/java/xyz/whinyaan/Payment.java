@@ -1,14 +1,17 @@
 package xyz.whinyaan;
 
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+import java.util.List;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 //Carias
 public class Payment {
-    public static void payment(double totalPrice) {
+    public static void payment(
+        double totalPrice,
+        HashMap<String, List<Object>> cartItems
+    ) {
         while (true) {
             String[] options = { "Cash", "Card" };
             int paymentMethodChoice = JOptionPane.showOptionDialog(null,
@@ -22,9 +25,9 @@ public class Payment {
 
             switch (paymentMethodChoice) {
                 case 0:
-                    handleCashPayment(totalPrice);
+                    handleCashPayment(totalPrice, cartItems);
                 case 1:
-                    handleCardPayment(totalPrice);
+                    handleCardPayment(totalPrice, cartItems);
                 default:
                     JOptionPane.showMessageDialog(
                             null,
@@ -35,7 +38,10 @@ public class Payment {
         }
     }
 
-    private static void handleCashPayment(double totalPrice) {
+    private static void handleCashPayment(
+            double totalPrice,
+            HashMap<String, List<Object>> cartItems
+        ) {
         while (true) {
             String amountStr = JOptionPane.showInputDialog(null,
                     "Enter the amount paid:");
@@ -47,6 +53,9 @@ public class Payment {
                         "Payment successful. Change: " + change,
                         "Success",
                         JOptionPane.INFORMATION_MESSAGE);
+                JDialog dialog = new JDialog();
+                dialog.setVisible(true);
+                new Receipt(dialog, amountPaid, cartItems);
                 break;
             } else {
                 JOptionPane.showMessageDialog(
@@ -61,7 +70,10 @@ public class Payment {
         app.anotherTransaction();
     }
 
-    private static void handleCardPayment(double totalPrice) {
+    private static void handleCardPayment(
+        double totalPrice,
+        HashMap<String, List<Object>> cartItems
+    ) {
         while (true) {
             String cardNumber = JOptionPane.showInputDialog(null,
                     "Enter card number:");
@@ -91,32 +103,6 @@ public class Payment {
                 continue;
             }
 
-            try {
-                // Parse the expiry date
-                DateTimeFormatter formatter = DateTimeFormatter
-                        .ofPattern("MM/yy");
-                YearMonth expiry = YearMonth.parse(expiryDate, formatter);
-
-                // Get the current date
-                YearMonth now = YearMonth.now();
-
-                // Check if the expiry date is in the future
-                if (expiry.isAfter(now) || expiry.equals(now)) {
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "The card has already expired. Payment failed. Try again.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                    continue;
-                }
-            } catch (DateTimeParseException e) {
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Invalid expiry date. Payment failed. Try again.",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                continue;
-            }
             String CVV = JOptionPane.showInputDialog(
                     null,
                     "Enter card CVV:");
@@ -130,12 +116,9 @@ public class Payment {
                 continue;
             }
 
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Card payment successful. The amount of " + totalPrice +
-                            " has been deducted from your bank account.",
-                    "Success",
-                    JOptionPane.INFORMATION_MESSAGE);
+            JDialog dialog = new JDialog();
+            dialog.setVisible(true);
+            new Receipt(dialog, 0, cartItems);
 
             break;
         }

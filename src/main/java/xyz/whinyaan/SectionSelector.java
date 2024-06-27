@@ -72,11 +72,16 @@ public class SectionSelector extends JDialog {
             selectedSection = (String) comboBox.getSelectedItem();
         });
 
-        cancelButton.addActionListener(e -> dispose());
+        cancelButton.addActionListener(e -> {
+            parent.dispose();
+            dispose();
+            parent.dispose();
+        });
 
         cartButton.addActionListener(e -> {
             parent.dispose();
             dispose();
+            parent.dispose();
             cartDisplayed = true;
             ShoppingCart.showCart();
         });
