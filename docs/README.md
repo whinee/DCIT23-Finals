@@ -47,17 +47,152 @@ just run
 
 Mr. Arriola was responsible for the section, item selection system, and integrating the code of the group members.
 
+```mermaid
+flowchart TD
+    start([selectSection]) -->
+    A[/print sections/] -->
+    B{prompt<br>user} --> |select section| C[/print items from selected section/] -->
+    D{prompt<br>user}
+        D --> |button press:<br>go back to selection of section| A
+        D --> |select item| E[/input quantity/]
+            E --> F{input<br>valid?}
+                G --> E
+                F --> |yes| H[["addItemToCart(item)"]] --> C
+                F --> |no| G[/print "Input invalid. Try again."/]
+    B & D --> |button press:<br>view cart| K[["viewCart()"]]
+```
+
 ### Neil Crisostomo
 
 Mr. Crisostomo was responsible for the creation of the user management system.
+
+```mermaid
+flowchart TD
+    meta[App.java]
+
+    main([main]) -->
+    O[Set Styles] --> P[["start()"]]
+```
+
+```mermaid
+flowchart TD
+    start([start]) -->
+    
+    A{Login<br>Signup<br>or Exit?}
+    A --> |login| Q[["showLoginPanel()"]]
+    A --> |signup| S[["showRegisterPanel()"]]
+    A --> |exit| AE([exit])
+```
+
+```mermaid
+flowchart TD
+    meta[App.java]
+    
+    P[["start()"]]
+    
+        
+    R([showLoginPanel]) -->
+    B[/input username/] -->
+    U{"username == null or<br> username.isEmpty()"}
+        U --> |yes| P
+        U --> |no| F[/input password/] -->
+        V{"password == null or<br> password.isEmpty()"}
+            V --> |yes| P
+            V --> |no| D{"user doesn't exist or<br>password is inccorect?"}
+                D --> |yes| H[/print "Invalid username or password!"/] --> P
+                D --> |no| E[["SectionSelector.main()"]]
+```
+
+```mermaid
+flowchart TD
+    meta[App.java]
+    
+    P[["start()"]]
+    
+    T([showRegisterPanel]) -->
+    AF[/input username/] -->
+    AG{"username == null or<br> username.isEmpty()"}
+        AG --> |yes| P
+        AG --> |no| AH{"is usernme<br>taken?"}
+            AH --> |yes| AI[/print "Username already exists.<br>Please try again with a different username."/] --> P
+            AH --> |no| J[/input full name/] -->
+                W{"fullName == null or<br> fullName.isEmpty()"}
+                    W --> |yes| P
+                    W --> |no| K[/input contact no/] --> AJ((A))
+```
+
+```mermaid
+flowchart TD
+    P[["start()"]]
+    AJ((A)) --> X{"contactNo == null or<br> contactNo.isEmpty()"}
+        X --> |yes| P
+        X --> |no| Z{"!contactNo.matches('\\d+')"}
+            Z --> |no| AA[/print "Contact number must contain only digits."/] --> P
+            Z --> |no| L[/input password/] -->
+                AB{"password == null or<br> password.isEmpty()"}
+                    AB --> |yes| P
+                    AB --> |no| M[/input password confirmation/] -->
+                        AC{"confirmPassword == null or<br> confirmPassword.isEmpty()"}
+                            AC --> |yes| P
+                            AC --> |no| AD{"password equals<br>to confirmPassword?"}
+                                AD --> |yes| N[add user details to User DB] --> P
+```
 
 ### Mikyla Reign
 
 Ms. Mikyla was responsible for the shopping cart system.
 
+```mermaid
+flowchart TD
+    addItemToCart([addItemToCart]) -->
+    A[/args: section, item, quantity/] -->
+    K{item<br>in cart?}
+        K --> |yes| B[add item to cart] --> C
+        K --> |no| L[modify item in cart] --> C
+    C([return])
+
+    deleteItemInCart([deleteItemInCart]) -->
+    M[/args: section, item/] -->
+    N[delete item in cart] -->
+    O([return])
+
+    checkout([checkout]) -->
+    Q[/print contents of cart and<br>quantity and price of each/] -->
+    R[["payment(total_price)"]]
+
+    viewCart([viewCart]) -->
+    D[/print contents of cart and<br>quantity and price of each/] -->
+    E{prompt<br>user}
+        E --> |checkout| F[["checkout()"]]
+        E --> |select item| G[/print item/] -->
+            H{prompt<br>user}
+                H --> |modify quantity| I[/input quantity/] -->
+                    J[["addItemToCart(section, item, quantity)"]] --> D
+                H --> |remove item| P[["deleteItemInCart(section, item, quantity)"]] --> D
+```
+
 ### Trisha Carias
 
 Ms. Carias was responsible for the checkout and payment system.
+
+```mermaid
+flowchart TD
+    checkout([payment]) -->
+    AD[/args: total_price/] -->
+    R{mode of<br>payment?}
+        R --> |cash| S[/Enter amount of payment/] -->
+            T[compute change] -->
+            U[/print receipt/] -->
+            AA[/print "Do you want to make another transaction?"/]
+                AA --> |yes| AB[["select()"]]
+                AA --> |no| AC([exit])
+        R --> |Credit/Debit card| V[/enter Credit/Debit card number/] -->
+            W[/enter CVV/] -->
+            X[calculate checksum of Credit/Debit card number] -->
+            Y{checksum<br>correct?}
+                Y --> |yes| U
+                Y --> |no| Z[/print "Credit/Debit card number<br>incorrect. Try again."/] --> V
+```
 
 <!-- License section. Leave unchanged except when changing the style altogether. -->
 <h2 id="license"><b><a href="#license">License</a></b></h2>

@@ -155,13 +155,24 @@ public class App {
             start();
         }
 
+        if (isUsernameTaken(username)) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Username already exists. Please try again with a different username.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            start();
+        }
+
         String fullName = JOptionPane.showInputDialog("Enter Full Name:");
         if (fullName == null || fullName.isEmpty()) {
             start();
         }
 
         String contactNo = JOptionPane.showInputDialog("Enter Contact No.:");
-        if (contactNo == null || !contactNo.matches("\\d+")) {
+        if (contactNo == null || contactNo.isEmpty()){
+            start();
+        } else if (!contactNo.matches("\\d+")) {
             JOptionPane.showMessageDialog(
                 null,
                 "Contact number must contain only digits.",
@@ -208,15 +219,6 @@ public class App {
             JOptionPane.showMessageDialog(
                 null,
                 "Passwords do not match!",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
-            start();
-        }
-
-        if (isUsernameTaken(username)) {
-            JOptionPane.showMessageDialog(
-                null,
-                "Username already exists!",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
             start();
