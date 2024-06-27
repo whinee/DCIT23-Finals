@@ -27,8 +27,7 @@ public class SelectItem {
         HashMap<String, Item> cannedJarredGoods = new HashMap<>();
         cannedJarredGoods.put("555 Tuna", new Item(25.25, 1, "piece"));
         cannedJarredGoods.put("Argentina Corned beef", new Item(
-            30.75, 1, "piece"
-        ));
+                30.75, 1, "piece"));
         cannedJarredGoods.put("Maling", new Item(53, 1, "piece"));
         cannedJarredGoods.put("Silver swan", new Item(15.75, 1, "piece"));
         cannedJarredGoods.put("UFC Ketchup", new Item(11.50, 1, "piece"));
@@ -49,8 +48,7 @@ public class SelectItem {
         beverage.put("Vita milk", new Item(35, 1, "piece"));
         beverage.put("Cobra", new Item(24.50, 1, "piece"));
         beverage.put("Bearbrand Sterilized", new Item(
-            38.25, 1, "piece"
-        ));
+                38.25, 1, "piece"));
         beverage.put("Red horse", new Item(110.00, 1, "piece"));
         sectionsItems.put("Beverage", beverage);
 
@@ -58,19 +56,20 @@ public class SelectItem {
         personalCareAndCleaners.put("Tissue", new Item(11.50, 1, "piece"));
         personalCareAndCleaners.put("Joy", new Item(10, 1, "piece"));
         personalCareAndCleaners.put("Safeguard", new Item(19.75, 1, "piece"));
-        personalCareAndCleaners.put("Mr. clean (bar)", new Item(27.25, 1, "piece"));
+        personalCareAndCleaners.put("Mr. clean (bar)",
+                new Item(27.25, 1, "piece"));
         personalCareAndCleaners.put("Downy", new Item(15, 1, "piece"));
         personalCareAndCleaners.put("Tender care (powder)", new Item(
-            21, 1, "piece"
-        ));
-        personalCareAndCleaners.put("Modess (8 pcs)", new Item(47.25, 1, "pack"));
+                21, 1, "piece"));
+        personalCareAndCleaners.put("Modess (8 pcs)",
+                new Item(47.25, 1, "pack"));
         personalCareAndCleaners.put("Gatsby", new Item(50.75, 1, "piece"));
-        sectionsItems.put("Personal Care and Cleaners", personalCareAndCleaners);
+        sectionsItems.put("Personal Care and Cleaners",
+                personalCareAndCleaners);
 
     }
 
-    public void selectItem(String section)
-    {
+    public void selectItem(String section) {
 
         HashMap<String, Item> items = sectionsItems.get(section);
 
@@ -84,8 +83,7 @@ public class SelectItem {
                 JOptionPane.PLAIN_MESSAGE,
                 null,
                 keys,
-                keys[0]
-        );
+                keys[0]);
 
         if (itemName == null) {
             App app = new App();
@@ -101,33 +99,30 @@ public class SelectItem {
 
         while (true) {
             String input = JOptionPane.showInputDialog(
-                null, "Enter number of " + unitNum + " " + unit + ":"
-            );
+                    null, "Enter number of " + unitNum + " " + unit + ":");
 
             if (input == null) {
                 App app = new App();
                 app.anotherTransaction();
                 return;
             }
-            
+
             try {
                 quantity = Integer.parseInt(input);
                 if (quantity > 0) {
                     break;
                 }
                 JOptionPane.showMessageDialog(
-                    null,
-                    "Invalid input. Please try again and enter a non-negative number.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
-                );
+                        null,
+                        "Invalid input. Please try again and enter a non-negative number.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(
-                    null,
-                    "Invalid input. Please try again and enter a valid number.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE
-                );
+                        null,
+                        "Invalid input. Please try again and enter a valid number.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
 

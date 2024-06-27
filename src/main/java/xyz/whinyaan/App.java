@@ -15,17 +15,17 @@ public class App {
     public static int userCount = 0;
 
     public static void start() {
-        String[] options = {"Register", "Login", "Exit"};
+        String[] options = { "Register", "Login", "Exit" };
 
         int choice = JOptionPane.showOptionDialog(
-            null,
-            "Select an option",
-            "Welcome to the shop!",
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.INFORMATION_MESSAGE,
-            null,
-            options,
-            options[0]);
+                null,
+                "Select an option",
+                "Welcome to the shop!",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                options,
+                options[0]);
 
         switch (choice) {
             case 0:
@@ -39,7 +39,7 @@ public class App {
             default:
                 start();
                 break;
-            }
+        }
     }
 
     public static void anotherTransaction() {
@@ -63,8 +63,10 @@ public class App {
     }
 
     public static void main(String[] args) {
-        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 14));
-        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.PLAIN, 12));
+        UIManager.put("OptionPane.messageFont",
+                new Font("Arial", Font.BOLD, 14));
+        UIManager.put("OptionPane.buttonFont",
+                new Font("Arial", Font.PLAIN, 12));
         UIManager.put("OptionPane.messageForeground", Color.WHITE);
 
         Color backgroundColor = new Color(19, 21, 32);
@@ -100,7 +102,8 @@ public class App {
         UIManager.put("Label.background", backgroundColor);
         UIManager.put("CheckBox.background", backgroundColor);
         UIManager.put("RadioButton.background", backgroundColor);
-        UIManager.put("TitledBorder.border", BorderFactory.createLineBorder(foregroundColor));
+        UIManager.put("TitledBorder.border",
+                BorderFactory.createLineBorder(foregroundColor));
         UIManager.put("ToolTip.background", backgroundColor);
 
         // Menus
@@ -141,10 +144,10 @@ public class App {
         // initialize dummy account for testing
         // remove in deployment
         // userDatabase[userCount++] = new User(
-        //     "test",
-        //     "testing account",
-        //     "09123456789",
-        //     "test");
+        // "test",
+        // "testing account",
+        // "09123456789",
+        // "test");
 
         start();
     }
@@ -157,10 +160,10 @@ public class App {
 
         if (isUsernameTaken(username)) {
             JOptionPane.showMessageDialog(
-                null,
-                "Username already exists. Please try again with a different username.",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+                    null,
+                    "Username already exists. Please try again with a different username.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             start();
         }
 
@@ -170,61 +173,64 @@ public class App {
         }
 
         String contactNo = JOptionPane.showInputDialog("Enter Contact No.:");
-        if (contactNo == null || contactNo.isEmpty()){
+        if (contactNo == null || contactNo.isEmpty()) {
             start();
         } else if (!contactNo.matches("\\d+")) {
             JOptionPane.showMessageDialog(
-                null,
-                "Contact number must contain only digits.",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+                    null,
+                    "Contact number must contain only digits.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             start();
         } else if (!(contactNo.length() == 11)) {
             JOptionPane.showMessageDialog(
-                null,
-                "Contact number must only of length 11.",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+                    null,
+                    "Contact number must only of length 11.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             start();
         }
 
         JPasswordField passwordField = new JPasswordField();
         int passwordOption = JOptionPane.showConfirmDialog(
-            null,
-            passwordField,
-            "Enter Password:",
-            JOptionPane.OK_CANCEL_OPTION,
-            JOptionPane.PLAIN_MESSAGE);
+                null,
+                passwordField,
+                "Enter Password:",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE);
         if (passwordOption != JOptionPane.OK_OPTION) {
             start();
-        };
+        }
+        ;
         String password = new String(passwordField.getPassword());
-    
+
         if (password.isEmpty()) {
             start();
-        };
-        
+        }
+        ;
+
         JPasswordField confirmPasswordField = new JPasswordField();
         int confirmPasswordOption = JOptionPane.showConfirmDialog(
-            null,
-            confirmPasswordField,
-            "Confirm Password:",
-            JOptionPane.OK_CANCEL_OPTION,
-            JOptionPane.PLAIN_MESSAGE);
+                null,
+                confirmPasswordField,
+                "Confirm Password:",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE);
         if (confirmPasswordOption != JOptionPane.OK_OPTION) {
             start();
         }
         String confirmPassword = new String(confirmPasswordField.getPassword());
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(
-                null,
-                "Passwords do not match!",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+                    null,
+                    "Passwords do not match!",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             start();
         }
 
-        userDatabase[userCount++] = new User(username, fullName, contactNo, password);
+        userDatabase[userCount++] = new User(username, fullName, contactNo,
+                password);
         JOptionPane.showMessageDialog(
                 null,
                 "Registration successful!",
@@ -240,11 +246,11 @@ public class App {
 
         JPasswordField passwordField = new JPasswordField();
         int passwordOption = JOptionPane.showConfirmDialog(
-            null,
-            passwordField,
-            "Enter Password:",
-            JOptionPane.OK_CANCEL_OPTION,
-            JOptionPane.PLAIN_MESSAGE);
+                null,
+                passwordField,
+                "Enter Password:",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE);
         if (passwordOption != JOptionPane.OK_OPTION) {
             start();
         }

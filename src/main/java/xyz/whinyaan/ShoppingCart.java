@@ -15,14 +15,14 @@ public class ShoppingCart {
             List<Object> itemDetails = cartItems.get(itemName);
             quantity = (int) itemDetails.get(1) + quantity;
         }
-    
+
         double total = item.getPrice() * quantity;
         ShoppingCart.cartItems.put(
-            itemName,
-            Arrays.asList(
-                item,
-                quantity,
-                total));
+                itemName,
+                Arrays.asList(
+                        item,
+                        quantity,
+                        total));
 
         SectionSelector.main();
     }
@@ -31,10 +31,11 @@ public class ShoppingCart {
         ShoppingCart.cartItems.remove(itemName);
     }
 
-    // public void updateItemQuantity(String itemName, Item item, int quantity) {
-    //     if (quantity > 0) {
-    //         addItem(itemName, item, quantity);
-    //     }
+    // public void updateItemQuantity(String itemName, Item item, int quantity)
+    // {
+    // if (quantity > 0) {
+    // addItem(itemName, item, quantity);
+    // }
     // }
 
     public static double calculateTotal() {
@@ -55,10 +56,9 @@ public class ShoppingCart {
         JDialog dialog = new JDialog();
         dialog.setModal(true);
 
-        ShoppingCartDialog shoppingCartDialog = new ShoppingCartDialog(dialog, cartItems);
+        ShoppingCartDialog shoppingCartDialog = new ShoppingCartDialog(dialog,
+                cartItems);
         shoppingCartDialog.main();
     }
 
 }
-
-

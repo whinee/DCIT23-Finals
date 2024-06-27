@@ -26,7 +26,7 @@ public class SectionSelector extends JDialog {
     public SectionSelector(JFrame parent, String[] sections) {
         super(parent, "Sections", true);
         setLayout(new BorderLayout());
-    
+
         comboBox = new JComboBox<>(sections);
 
         JPanel panel = new JPanel(new GridBagLayout());
@@ -38,7 +38,7 @@ public class SectionSelector extends JDialog {
 
         JLabel sectionLabel = new JLabel("Select a section:");
         sectionLabel.setFont(UIManager.getFont("OptionPane.messageFont"));
-        
+
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         labelPanel.add(sectionLabel);
         gbc.gridx = 0;
@@ -80,7 +80,7 @@ public class SectionSelector extends JDialog {
             cartDisplayed = true;
             ShoppingCart.showCart();
         });
-        
+
         getContentPane().add(panel);
         pack();
 
@@ -94,12 +94,12 @@ public class SectionSelector extends JDialog {
 
     public static void main() {
         String[] sections = {
-            "Fruits and Vegetable",
-            "Frozen Meats",
-            "Canned/Jarred Goods",
-            "Dairy and Baking Goods",
-            "Beverage",
-            "Personal Care and Cleaners",
+                "Fruits and Vegetable",
+                "Frozen Meats",
+                "Canned/Jarred Goods",
+                "Dairy and Baking Goods",
+                "Beverage",
+                "Personal Care and Cleaners",
         };
 
         JFrame dialog = new JFrame();

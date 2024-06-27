@@ -15,7 +15,8 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 public class ShoppingCartDialog extends JDialog {
-    public ShoppingCartDialog(JDialog parent, HashMap<String, List<Object>> cartItems) {
+    public ShoppingCartDialog(JDialog parent,
+            HashMap<String, List<Object>> cartItems) {
         super(parent, "Shopping Cart", true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setSize(600, 400);
@@ -27,7 +28,8 @@ public class ShoppingCartDialog extends JDialog {
 
         parent.setBackground(backgroundColor);
 
-        String[] columnNames = {"Item", "Unit Price", "Unit", "Quantity", "Total"};
+        String[] columnNames = { "Item", "Unit Price", "Unit", "Quantity",
+                "Total" };
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         JTable table = new JTable(model);
 
@@ -35,7 +37,7 @@ public class ShoppingCartDialog extends JDialog {
         table.setForeground(foregroundColor);
         table.setSelectionBackground(secondaryBackgroundColor);
         table.setSelectionForeground(foregroundColor);
-        table.setGridColor(foregroundColor);        // Set table and header colors
+        table.setGridColor(foregroundColor); // Set table and header colors
 
         table.setFont(new Font("Arial", Font.PLAIN, 12));
 
@@ -49,12 +51,12 @@ public class ShoppingCartDialog extends JDialog {
             Item item = (Item) value.get(0);
             int quantity = ((Number) value.get(1)).intValue();
             double total = ((Number) value.get(2)).doubleValue();
-            model.addRow(new Object[]{
+            model.addRow(new Object[] {
                     entry.getKey(),
                     item.getPrice(),
                     item.getUnitNum() + " " + item.getUnit(),
                     quantity,
-                    total});
+                    total });
         }
 
         JScrollPane scrollPane = new JScrollPane(table);
@@ -64,7 +66,11 @@ public class ShoppingCartDialog extends JDialog {
         add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(UIManager.getColor("Panel.background")); // Set the button panel background
+        buttonPanel.setBackground(UIManager.getColor("Panel.background")); // Set
+                                                                           // the
+                                                                           // button
+                                                                           // panel
+                                                                           // background
 
         JButton checkoutButton = new JButton("Checkout");
         JButton backButton = new JButton("Back");

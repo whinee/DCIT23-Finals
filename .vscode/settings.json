@@ -4,4 +4,10 @@
         "**/*.class": true,
         ".history": true,
     },
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java",
+        "editor.wordWrap": "off",
+        "editor.rulers": [80]
+    },
+    "java.settings.url": ".vscode/settings.prefs"
 }
