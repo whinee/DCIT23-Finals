@@ -131,15 +131,13 @@ public class Payment {
                 null,
                 "Card payment successful. The amount of " + totalPrice +
                 " has been deducted from your bank account.",
-                "SuccessApp app = new App();\n" + //
-                                        "            app.anotherTransaction();",
+                "Success",
                 JOptionPane.INFORMATION_MESSAGE);
 
             break;
         }
 
-        App app = new App();
-        app.anotherTransaction();
+        App.anotherTransaction();
     }
 
     private static boolean isValidCardNumber(String cardNumber) {
@@ -150,6 +148,9 @@ public class Payment {
 
         int sum = 0;
         boolean alternate = false;
+        if (cardNumber == null) {
+            return false;
+        }
         for (int i = cardNumber.length() - 1; i >= 0; i--) {
             int n = Integer.parseInt(cardNumber.substring(i, i + 1));
             if (alternate) {

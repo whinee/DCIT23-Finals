@@ -1,6 +1,8 @@
 package xyz.whinyaan;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 public class ShoppingCartDialog extends JDialog {
@@ -18,9 +21,27 @@ public class ShoppingCartDialog extends JDialog {
         setSize(600, 400);
         setLayout(new BorderLayout());
 
+        Color backgroundColor = new Color(19, 21, 32);
+        Color secondaryBackgroundColor = new Color(50, 56, 78);
+        Color foregroundColor = Color.WHITE;
+
+        parent.setBackground(backgroundColor);
+
         String[] columnNames = {"Item", "Unit Price", "Unit", "Quantity", "Total"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         JTable table = new JTable(model);
+
+        table.setBackground(backgroundColor);
+        table.setForeground(foregroundColor);
+        table.setSelectionBackground(secondaryBackgroundColor);
+        table.setSelectionForeground(foregroundColor);
+        table.setGridColor(foregroundColor);        // Set table and header colors
+
+        table.setFont(new Font("Arial", Font.PLAIN, 12));
+
+        table.getTableHeader().setBackground(backgroundColor);
+        table.getTableHeader().setForeground(foregroundColor);
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
 
         // Populate the table
         for (HashMap.Entry<String, List<Object>> entry : cartItems.entrySet()) {
@@ -37,9 +58,14 @@ public class ShoppingCartDialog extends JDialog {
         }
 
         JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBackground(backgroundColor);
+        scrollPane.getViewport().setBackground(backgroundColor);
+
         add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(UIManager.getColor("Panel.background")); // Set the button panel background
+
         JButton checkoutButton = new JButton("Checkout");
         JButton backButton = new JButton("Back");
 

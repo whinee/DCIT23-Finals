@@ -3,6 +3,7 @@ package xyz.whinyaan;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.UIManager;
@@ -62,33 +63,88 @@ public class App {
     }
 
     public static void main(String[] args) {
-        UIManager.put("OptionPane.messageFont", new Font(
-                "Arial", Font.BOLD, 14));
-        UIManager.put("OptionPane.buttonFont", new Font(
-                "Arial", Font.PLAIN, 12));
-
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 14));
+        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.PLAIN, 12));
         UIManager.put("OptionPane.messageForeground", Color.WHITE);
 
-        UIManager.put("OptionPane.background", new Color(19, 21, 32));
-        UIManager.put("Panel.background", new Color(19, 21, 32));
-        UIManager.put("ComboBox.background", new Color(19, 21, 32));
+        Color backgroundColor = new Color(19, 21, 32);
+        Color secondaryBackgroundColor = new Color(50, 56, 78);
+        Color foregroundColor = Color.WHITE;
 
-        UIManager.put("Button.background", new Color(50, 56, 78));
-        UIManager.put("ComboBox.selectionBackground", new Color(50, 56, 78));
-        UIManager.put("TextField.background", new Color(50, 56, 78));
+        // Background
+        UIManager.put("OptionPane.background", backgroundColor);
+        UIManager.put("Panel.background", backgroundColor);
+        UIManager.put("ComboBox.background", backgroundColor);
 
-        UIManager.put("Button.foreground", Color.WHITE);
-        UIManager.put("ComboBox.foreground", Color.WHITE);
-        UIManager.put("ComboBox.selectionForeground", Color.WHITE);
-        UIManager.put("TextField.foreground", Color.WHITE);
+        // Secondary Background
+        UIManager.put("Button.background", secondaryBackgroundColor);
+        UIManager.put("ComboBox.selectionBackground", secondaryBackgroundColor);
+        UIManager.put("TextField.background", secondaryBackgroundColor);
+        UIManager.put("PasswordField.background", secondaryBackgroundColor);
+
+        // Foreground
+        UIManager.put("Button.foreground", foregroundColor);
+        UIManager.put("ComboBox.foreground", foregroundColor);
+        UIManager.put("ComboBox.selectionForeground", foregroundColor);
+        UIManager.put("TextField.foreground", foregroundColor);
+        UIManager.put("TextField.foreground", foregroundColor);
+        UIManager.put("PasswordField.foreground", foregroundColor);
+
+        // Additional components
+        UIManager.put("Label.foreground", foregroundColor);
+        UIManager.put("CheckBox.foreground", foregroundColor);
+        UIManager.put("RadioButton.foreground", foregroundColor);
+        UIManager.put("TitledBorder.titleColor", foregroundColor);
+        UIManager.put("ToolTip.foreground", foregroundColor);
+
+        UIManager.put("Label.background", backgroundColor);
+        UIManager.put("CheckBox.background", backgroundColor);
+        UIManager.put("RadioButton.background", backgroundColor);
+        UIManager.put("TitledBorder.border", BorderFactory.createLineBorder(foregroundColor));
+        UIManager.put("ToolTip.background", backgroundColor);
+
+        // Menus
+        UIManager.put("Menu.background", backgroundColor);
+        UIManager.put("Menu.foreground", foregroundColor);
+        UIManager.put("MenuItem.background", backgroundColor);
+        UIManager.put("MenuItem.foreground", foregroundColor);
+        UIManager.put("PopupMenu.background", backgroundColor);
+        UIManager.put("PopupMenu.foreground", foregroundColor);
+
+        // Scrollbars
+        UIManager.put("ScrollBar.background", backgroundColor);
+        UIManager.put("ScrollBar.foreground", foregroundColor);
+        UIManager.put("ScrollBar.thumb", secondaryBackgroundColor);
+        UIManager.put("ScrollBar.track", backgroundColor);
+
+        // Tables
+        UIManager.put("Table.background", secondaryBackgroundColor);
+        UIManager.put("Table.foreground", foregroundColor);
+        UIManager.put("Table.selectionBackground", secondaryBackgroundColor);
+        UIManager.put("Table.selectionForeground", foregroundColor);
+        UIManager.put("Table.gridColor", foregroundColor);
+
+        // Lists
+        UIManager.put("List.background", backgroundColor);
+        UIManager.put("List.foreground", foregroundColor);
+        UIManager.put("List.selectionBackground", secondaryBackgroundColor);
+        UIManager.put("List.selectionForeground", foregroundColor);
+
+        // Trees
+        UIManager.put("Tree.background", backgroundColor);
+        UIManager.put("Tree.foreground", foregroundColor);
+        UIManager.put("Tree.selectionBackground", secondaryBackgroundColor);
+        UIManager.put("Tree.selectionForeground", foregroundColor);
+        UIManager.put("Tree.textBackground", backgroundColor);
+        UIManager.put("Tree.textForeground", foregroundColor);
 
         // initialize dummy account for testing
         // remove in deployment
-        userDatabase[userCount++] = new User(
-            "test",
-            "testing account",
-            "09123456789",
-            "test");
+        // userDatabase[userCount++] = new User(
+        //     "test",
+        //     "testing account",
+        //     "09123456789",
+        //     "test");
 
         start();
     }
@@ -96,22 +152,29 @@ public class App {
     public static void showRegisterPanel() {
         String username = JOptionPane.showInputDialog("Enter Username:");
         if (username == null || username.isEmpty()) {
-            anotherTransaction();
+            start();
         }
 
         String fullName = JOptionPane.showInputDialog("Enter Full Name:");
         if (fullName == null || fullName.isEmpty()) {
-            anotherTransaction();
+            start();
         }
 
         String contactNo = JOptionPane.showInputDialog("Enter Contact No.:");
         if (contactNo == null || !contactNo.matches("\\d+")) {
             JOptionPane.showMessageDialog(
                 null,
-                "Contact number must contain only digits!",
+                "Contact number must contain only digits.",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
-            anotherTransaction();
+            start();
+        } else if (!(contactNo.length() == 11)) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Contact number must only of length 11.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            start();
         }
 
         JPasswordField passwordField = new JPasswordField();
@@ -122,12 +185,12 @@ public class App {
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.PLAIN_MESSAGE);
         if (passwordOption != JOptionPane.OK_OPTION) {
-            anotherTransaction();
+            start();
         };
         String password = new String(passwordField.getPassword());
     
         if (password.isEmpty()) {
-            anotherTransaction();
+            start();
         };
         
         JPasswordField confirmPasswordField = new JPasswordField();
@@ -138,7 +201,7 @@ public class App {
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.PLAIN_MESSAGE);
         if (confirmPasswordOption != JOptionPane.OK_OPTION) {
-            anotherTransaction();
+            start();
         }
         String confirmPassword = new String(confirmPasswordField.getPassword());
         if (!password.equals(confirmPassword)) {
@@ -147,7 +210,7 @@ public class App {
                 "Passwords do not match!",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
-            anotherTransaction();
+            start();
         }
 
         if (isUsernameTaken(username)) {
@@ -156,7 +219,7 @@ public class App {
                 "Username already exists!",
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
-            anotherTransaction();
+            start();
         }
 
         userDatabase[userCount++] = new User(username, fullName, contactNo, password);
@@ -170,7 +233,7 @@ public class App {
     public static void showLoginPanel() {
         String username = JOptionPane.showInputDialog("Enter Username:");
         if (username == null || username.isEmpty()) {
-            anotherTransaction();
+            start();
         }
 
         JPasswordField passwordField = new JPasswordField();
@@ -181,11 +244,11 @@ public class App {
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.PLAIN_MESSAGE);
         if (passwordOption != JOptionPane.OK_OPTION) {
-            anotherTransaction();
+            start();
         }
         String password = new String(passwordField.getPassword());
         if (password.isEmpty()) {
-            anotherTransaction();
+            start();
         }
 
         User user = getUserByUsername(username);
